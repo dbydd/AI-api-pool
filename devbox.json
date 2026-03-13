@@ -1,17 +1,39 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.16.0/.schema/devbox.schema.json",
   "packages": [
+    "rustup@1.27.0",
     "pkg-config",
-    "openssl"
+    "openssl@3.0.15"
   ],
   "shell": {
     "init_hook": [
-      "echo 'Welcome to devbox!' > /dev/null"
+      "export RUSTUP_HOME=\"$HOME/.rustup\"",
+      "export CARGO_HOME=\"$HOME/.cargo\"",
+      "export PATH=\"$CARGO_HOME/bin:$PATH\"",
+      "rustup default stable 2>/dev/null || true",
+      "echo 'AI API Pool devbox initialized'"
     ],
     "scripts": {
-      "test": [
-        "echo \"Error: no test specified\" && exit 1"
-      ]
+      "build": "cargo build",
+      "build-release": "cargo build --release",
+      "run": "cargo run",
+      "run-config": "cargo run -- config.yaml",
+      "test": "cargo test",
+      "test-ci": "cargo test -- --nocapture",
+      "check": "cargo check",
+      "clippy": "cargo clippy -- -D warnings",
+      "fmt": "cargo fmt -- --check",
+      "fmt-fix": "cargo fmt",
+      "doc": "cargo doc --no-deps",
+      "clean": "cargo clean",
+      "tree": "cargo tree",
+      "outdated": "cargo outdated",
+      "bench": "cargo bench",
+      "shell": "cargo run --release -- config.yaml"
     }
+  },
+  "env": {
+    "RUST_BACKTRACE": "1",
+    "RUST_LOG": "info"
   }
 }
