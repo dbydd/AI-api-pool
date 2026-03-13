@@ -1,0 +1,33 @@
+server:
+  host: "0.0.0.0"
+  port: 8080
+  config_file: "config.yaml"
+
+models:
+  deepseek-r1:
+    model_name: "deepseek-r1"
+    providers:
+      - name: "openrouter"
+        api_base: "https://openrouter.ai/api/v1"
+        api_key: "${OPENROUTER_API_KEY}"
+        enabled: true
+      - name: "azure"
+        api_base: "https://your-resource.openai.azure.com"
+        api_key: "${AZURE_API_KEY}"
+        enabled: true
+      - name: "deepseek"
+        api_base: "https://api.deepseek.com/v1"
+        api_key: "${DEEPSEEK_API_KEY}"
+        enabled: true
+
+  gpt-4o:
+    model_name: "gpt-4o"
+    providers:
+      - name: "openai"
+        api_base: "https://api.openai.com/v1"
+        api_key: "${OPENAI_API_KEY}"
+        enabled: true
+      - name: "azure"
+        api_base: "https://your-resource.openai.azure.com"
+        api_key: "${AZURE_API_KEY}"
+        enabled: true
